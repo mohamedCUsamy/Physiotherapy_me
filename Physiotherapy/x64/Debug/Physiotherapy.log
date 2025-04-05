@@ -1,4 +1,2 @@
-﻿  Scheduler.cpp
-C:\Users\user\Documents\GitHub\Physiotherapy_me\Physiotherapy\Scheduler.cpp(48,19): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\user\Documents\GitHub\Physiotherapy_me\Physiotherapy\Scheduler.cpp(49,23): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+﻿  main.cpp
   Physiotherapy.vcxproj -> C:\Users\user\Documents\GitHub\Physiotherapy_me\x64\Debug\Physiotherapy.exe
