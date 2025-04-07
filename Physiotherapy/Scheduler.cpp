@@ -12,6 +12,9 @@ Scheduler::Scheduler(string path)
     num_E_Devices = 0;
     num_X_Devices = 0;
 
+
+
+
     // intialize all before this function 
     Load_Input(path);
 

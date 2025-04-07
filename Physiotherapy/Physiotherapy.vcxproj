@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ArrayStack.h" />
+    <ClInclude Include="enums.h" />
     <ClInclude Include="EU_WaitList.h" />
     <ClInclude Include="LinkedQueue.h" />
     <ClInclude Include="Node.h" />
@@ -135,7 +136,7 @@
     <ClInclude Include="priNode.h" />
     <ClInclude Include="PriQueue.h" />
     <ClInclude Include="QueueADT.h" />
-    <ClInclude Include="Resource.h" />
+    <ClInclude Include="Ressource.h" />
     <ClInclude Include="Scheduler.h" />
     <ClInclude Include="StackADT.h" />
     <ClInclude Include="Treatment.h" />
@@ -145,7 +146,7 @@
     <ClCompile Include="EU_WaitList.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Patient.cpp" />
-    <ClCompile Include="Resource.cpp" />
+    <ClCompile Include="Ressource.cpp" />
     <ClCompile Include="Scheduler.cpp" />
     <ClCompile Include="Treatment.cpp" />
     <ClCompile Include="X_WaitList.cpp" />

@@ -49,6 +49,11 @@ bool Patient::get_IsNormal()
 	return isNormal;
 }
 
+void Patient::SetPatientStatus(Status newStatus)
+{
+    Patientstatus = newStatus;
+}
+
 
 
 
