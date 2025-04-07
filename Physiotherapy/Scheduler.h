@@ -22,9 +22,9 @@ class Scheduler
 
 	
 
-	EU_WaitList  U_List_name;
-	EU_WaitList  E_List_name;
-	X_WaitList  List_name;
+	EU_WaitList  U_waitingList;
+	EU_WaitList  E_waitingList;
+	X_WaitList  X_waitingList;
 
 	int Croom1;
 	int Croom2;
@@ -42,7 +42,14 @@ public:
 
 	void Load_Input(string& filename); //implementation
 
-	void Print_info();
+	void AddToWait_X(); // implementation
+
+	void AddToWait_U(); // implementation
+
+	void AddToWait_E(); // implementation
+
+	void Print_info();  // not in wanted form
 
 };
 
+//print with operator overloading

@@ -54,9 +54,12 @@ void Scheduler::Load_Input(string& filename)
         //cout << "Patients: " << numPatients << "\n";
         num_patients=numPatients;
 
-        int numTreatments;
-        int* duration = nullptr;
-        char* treatments = NULL;
+        int numTreatments;         //5  6  7
+        int* duration = nullptr;   //U X E
+        char* treatments = NULL;  // U 5 X 6 E 7
+
+        
+
         for (int i = 0; i < numPatients; i++) {
             char type; int VT, PT;
             file >> type >> PT >> VT >> numTreatments;
@@ -84,13 +87,6 @@ void Scheduler::Load_Input(string& filename)
                 // assume we put it with the order of input
                 //two parrallel arrays
             }
-
-            //cout << "Patient " << type << ": Appointment=" << PT << ", Arrival=" << VT << ", \n Treatments: \n";
-            for (int i = 0; i < numTreatments; i++)
-            {
-              //  cout << " Treatment " << treatments[i] << " for duration " << duration[i] << endl;
-            }
-            //cout << "\n" << endl;
 
             //create patient and add for them the information for each here + add it to the All patient list
             Patient* Ppatient;

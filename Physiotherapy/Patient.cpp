@@ -12,7 +12,6 @@ Patient::Patient(char* Req, int num_treatments, int* duration, int app, int arr,
 	{
 		Treatment* tptr = new Treatment(Req[i],duration[i]);
 		ReqTreatments.enqueue(tptr);
-
 	}
 
 	
