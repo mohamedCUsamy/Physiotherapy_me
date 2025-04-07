@@ -8,8 +8,11 @@ template <typename T>
 class priQueue
 {
     priNode<T>* head;
+    int count;
 public:
     priQueue() : head(nullptr) {}
+
+    int getCount() { return count; }
 
     ~priQueue() {
         T tmp;

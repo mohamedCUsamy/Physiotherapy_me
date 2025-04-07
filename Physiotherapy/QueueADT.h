@@ -34,6 +34,8 @@ public:
      @return  The front of the queue. */
     virtual bool peek(T& FrontEntry) const = 0;
 
+
+    virtual void Print_queue() = 0;
     /** Destroys this queue and frees its memory. */
     virtual ~QueueADT() {}
 }; // end QueueADT
