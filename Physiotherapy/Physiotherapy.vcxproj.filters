@@ -57,6 +57,9 @@
     <ClInclude Include="enums.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="EarlyPList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scheduler.cpp">
@@ -78,6 +81,9 @@
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="Ressource.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EarlyPList.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
