@@ -15,9 +15,9 @@ bool X_WaitList::cancel(int presc, int random, Patient*& pToBeRemoved)
     Patient* selected;// a temporary variable that holds the Patient who is cancelling
 
 
-    //    for (int i = 0; i < count; i++) { // for loop to dequeue all the patients before the one we want to select
+//    for (int i = 0; i < count; i++) { // for loop to dequeue all the patients before the one we want to select
     Patient* tempPatient;
-    while (dequeue(tempPatient))
+    while(dequeue(tempPatient)) 
     {
         tempQ.enqueue(tempPatient);
 
