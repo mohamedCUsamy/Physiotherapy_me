@@ -60,6 +60,9 @@
     <ClInclude Include="EarlyPList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scheduler.cpp">
@@ -85,6 +88,9 @@
     </ClCompile>
     <ClCompile Include="EarlyPList.cpp">
       <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
