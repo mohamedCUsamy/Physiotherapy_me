@@ -8,8 +8,23 @@ template <typename T>
 class priQueue
 {
     priNode<T>* head;
+protected:
+    int count;
 public:
-    priQueue() : head(nullptr) {}
+    priQueue() : head(nullptr) 
+    {
+        count = 0;
+        priNode<T>* fptr = head;
+        while (fptr) {
+            count++;
+            fptr = fptr->getNext();
+        }
+    }
+
+    int getCount() {
+        return count;
+    }
+
 
     ~priQueue() {
         T tmp;

@@ -2,7 +2,7 @@
 using namespace std;
 #include <iostream>
 
-Patient::Patient(char* Req, int num_treatments, int* duration, int app, int arr, bool Normality)
+Patient::Patient(char* Req, int num_treatments, int* duration, int app, int arr, bool Normality,string id)
 {
 	SetPT(app);
 	SetVT(arr);
@@ -47,6 +47,11 @@ void Patient::setType(bool isNormal)
 bool Patient::get_IsNormal()
 {
 	return isNormal;
+}
+
+LinkedQueue<Treatment*> Patient::getReqTreatment()
+{
+    return ReqTreatments;
 }
 
 void Patient::SetPatientStatus(Status newStatus)

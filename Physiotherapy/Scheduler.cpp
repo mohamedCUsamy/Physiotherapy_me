@@ -93,7 +93,10 @@ void Scheduler::Load_Input(string& filename)
 
             //create patient and add for them the information for each here + add it to the All patient list
             Patient* Ppatient;
-            Ppatient = new Patient(treatments, numTreatments, duration,PT, VT, type);
+
+            string id="P" + to_string(i)+ "_" + to_string(VT) ;
+
+            Ppatient = new Patient(treatments, numTreatments, duration,PT, VT, type,id);
             All_Patient.enqueue(Ppatient);
 
         }

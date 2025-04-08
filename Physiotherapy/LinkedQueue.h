@@ -53,12 +53,16 @@ class LinkedQueue :public QueueADT<T>
 private:
 	Node<T>* backPtr;
 	Node<T>* frontPtr;
+protected:
+	int count;
+
 public:
 	LinkedQueue();
 	bool isEmpty() const;
 	bool enqueue(const T& newEntry);
 	bool dequeue(T& frntEntry);
 	bool peek(T& frntEntry)  const;
+	int getCount();
 	~LinkedQueue();
 };
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -74,6 +78,13 @@ LinkedQueue<T>::LinkedQueue()
 {
 	backPtr = nullptr;
 	frontPtr = nullptr;
+	count = 0;
+	Node<T>* fptr = frontPtr;
+	while (fptr) {
+		count++;
+		fptr=fptr->getNext();
+	}
+
 
 }
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -165,6 +176,11 @@ bool LinkedQueue<T>::peek(T& frntEntry) const
 	frntEntry = frontPtr->getItem();
 	return true;
 
+}
+template<typename T>
+inline int LinkedQueue<T>::getCount()
+{
+	return count;
 }
 ///////////////////////////////////////////////////////////////////////////////////
 
