@@ -12,13 +12,27 @@ class ArrayStack : public StackADT<T>
 private:
 	T items[MAX_SIZE];		// Array of stack items
 	int top;                   // Index to top of stack
-
+	int count;
 public:
 
 	ArrayStack()
 	{
 		top = -1;
 	}  // end default constructor
+
+	int getCount() {
+		ArrayStack <Patient*> s1;
+		T x;
+		while (pop(x)) {
+			s1.push(x);
+			count++;
+		}
+		while (s1.pop(x)) {
+			push(x);
+		}
+
+		return count;
+	}
 
 	bool isEmpty() const
 	{

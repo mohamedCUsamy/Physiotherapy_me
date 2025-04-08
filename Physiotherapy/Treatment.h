@@ -21,7 +21,7 @@ public:
 
 	char getType();
 	int getDuration();
-
+	int getassignemntTime();
 
 
 };

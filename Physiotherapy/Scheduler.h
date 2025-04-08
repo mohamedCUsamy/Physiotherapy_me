@@ -7,9 +7,9 @@ using namespace std;
 #include "Patient.h"
 #include "PriQueue.h"
 #include "Patient.h"
-#include "UI.h"
 #include "ArrayStack.h"
 #include "EarlyPList.h"
+#include "UI.h"
 
 
 
@@ -24,7 +24,7 @@ class Scheduler
 	float pCancel;
 	float pReschedule;
 
-	UI *pOut;
+
 
 	EU_WaitList  U_waitingList;
 	EU_WaitList  E_waitingList;
@@ -36,15 +36,21 @@ class Scheduler
 	int Croom2;
 
 	LinkedQueue<Patient*>  All_Patient;
-	
+
 	LinkedQueue<Ressource*>E_Devices;
 	LinkedQueue<Ressource*>U_Devices;
 	LinkedQueue<Ressource*>X_Rooms;
 
 	priQueue<Patient*>In_TreatmentList;
 	ArrayStack<Patient*>FinishedPatients;
+	priQueue<Patient*>  LatePList;
+	EarlyPList EarlyPList;
 
-	EarlyPList EarlyList;
+
+	string path;
+	UI* pOut;
+
+
 
 
 public:
@@ -52,7 +58,6 @@ public:
 	Scheduler(string path);
 
 	void Load_Input(string& filename); //implementation
-
 
 
 	void AddToWait_X(); // implementation phase 2
@@ -63,6 +68,9 @@ public:
 
 	void Print_info();  // not in wanted form
 
+	void Simulation(); //
+
+	EU_WaitList RandomWaitList();
 };
 
 //print with operator overloading

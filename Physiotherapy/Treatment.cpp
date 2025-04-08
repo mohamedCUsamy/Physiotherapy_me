@@ -22,3 +22,8 @@ int Treatment::getDuration()
 {
 	return duration;
 }
+
+int Treatment::getassignemntTime()
+{
+	return assignmentTime;
+}

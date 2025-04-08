@@ -9,7 +9,7 @@ bool EarlyPList::Reschedule(int presc, int random)
 
         return false;
     }
-    int rand1=0;
+    int rand1 = 0;
     if (!isEmpty())
         rand1 = rand() % count + 1; // gets a random value from 1 to the number of patients
     else
