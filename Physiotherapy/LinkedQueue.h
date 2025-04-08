@@ -53,6 +53,7 @@ class LinkedQueue :public QueueADT<T>
 private:
 	Node<T>* backPtr;
 	Node<T>* frontPtr;
+
 protected:
 	int count;
 
@@ -62,6 +63,7 @@ public:
 	bool enqueue(const T& newEntry);
 	bool dequeue(T& frntEntry);
 	bool peek(T& frntEntry)  const;
+	//oid <T>print() const;
 	int getCount();
 	~LinkedQueue();
 };
@@ -200,5 +202,19 @@ LinkedQueue<T>::~LinkedQueue()
 	cout << "\nEnding LinkedQueue destructor..." << endl;  
 	*/
 }
+
+
+/*
+void LinkedQueue<T>::print() const {
+
+	Node<T>* current = frontPtr;
+
+	while (current) {
+		std::cout << current->getItem() << " ";
+		current = current->getNext();
+	}
+	          cout << "[Rear]" << std::endl;
+}
+*/
 
 #endif

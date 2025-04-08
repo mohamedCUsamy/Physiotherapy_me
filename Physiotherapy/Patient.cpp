@@ -1,6 +1,8 @@
 #include "Patient.h"
 using namespace std;
 #include <iostream>
+#include <string>
+
 
 Patient::Patient(char* Req, int num_treatments, int* duration, int app, int arr, bool Normality,string id)
 {
@@ -47,6 +49,11 @@ void Patient::setType(bool isNormal)
 bool Patient::get_IsNormal()
 {
 	return isNormal;
+}
+
+string Patient::getId()
+{
+    return ID;
 }
 
 LinkedQueue<Treatment*> Patient::getReqTreatment()
@@ -97,4 +104,9 @@ void Patient::print_Patient_info()
     }
 }
 
+ostream& operator<<(ostream& os, Patient* pat)
+{
 
+    os << pat->getId() << ", " << endl;
+    return os;
+}

@@ -1,12 +1,41 @@
 #include "Scheduler.h"
 #include <fstream>
-#include <vector>
+#include "UI.h"
 #include <iostream>
 using namespace std;
 
 
 Scheduler::Scheduler(string path)
 {
+
+    // Inside your Scheduler class (probably in constructor or initialization function)
+    UI* OUTPUT = new UI(
+        this->num_patients,    // or just num_patients if local variable
+        this->num_U_Devices,
+        this->num_E_Devices,
+        this->num_X_Devices,
+        this->pCancel,
+        this->pReschedule,
+        this->U_waitingList,   // reference to member variable
+        this->E_waitingList,
+        this->X_waitingList,
+        this->inTreatment,
+        this->Croom1,
+        this->Croom2,
+        this->All_Patient,
+        this->E_Devices,
+        this->U_Devices,
+        this->X_Rooms,
+        this->In_TreatmentList,
+        this->FinishedPatients,
+        this->EarlyList
+    );
+
+    pOut = OUTPUT;
+
+
+
+
     for (int i = 0; i < num_E_Devices; i++)
     {
         Ressource *Rptr = new Ressource('E');

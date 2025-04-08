@@ -90,7 +90,7 @@
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="UI.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

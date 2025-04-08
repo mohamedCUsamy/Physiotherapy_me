@@ -10,7 +10,7 @@ class Patient
 	int PT;
 	int VT;
 	string ID;
-	Status Patientstatus;  
+	Status Patientstatus; 
 	
 public:
 	Patient(char *Req, int num_treatments, int *duration,int app,int arr,bool Normality,string id);// needs to create the treatments and initialise for each there duration gotten from input function in scheduler
@@ -20,9 +20,12 @@ public:
 	int getVT();
 	void setType(bool isNormal);
 	bool get_IsNormal();
+	string getId();
 
 	LinkedQueue <Treatment*> getReqTreatment();
 	void SetPatientStatus(Status newStatus);
+
+	friend ostream& operator<<(ostream& os, Patient* pat);
 
 	void print_Patient_info();
 	

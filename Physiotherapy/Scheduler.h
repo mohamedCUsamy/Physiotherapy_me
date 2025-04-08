@@ -7,7 +7,9 @@ using namespace std;
 #include "Patient.h"
 #include "PriQueue.h"
 #include "Patient.h"
+#include "UI.h"
 #include "ArrayStack.h"
+#include "EarlyPList.h"
 
 
 
@@ -22,7 +24,7 @@ class Scheduler
 	float pCancel;
 	float pReschedule;
 
-	
+	UI *pOut;
 
 	EU_WaitList  U_waitingList;
 	EU_WaitList  E_waitingList;
@@ -42,7 +44,7 @@ class Scheduler
 	priQueue<Patient*>In_TreatmentList;
 	ArrayStack<Patient*>FinishedPatients;
 
-	//EarlyPatients EarlyList;
+	EarlyPList EarlyList;
 
 
 public:

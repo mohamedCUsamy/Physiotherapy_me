@@ -1,5 +1,6 @@
 #pragma once
 #include "priNode.h"
+#include "LinkedQueue.h"
 
 
 //This class impelements the priority queue as a sorted list (Linked List)
@@ -8,9 +9,11 @@ template <typename T>
 class priQueue
 {
     priNode<T>* head;
+
 protected:
     int count;
 public:
+
     priQueue() : head(nullptr) 
     {
         count = 0;
@@ -74,4 +77,15 @@ public:
     bool isEmpty() const {
         return head == nullptr;
     }
+
+    
+    void print() {
+        priNode<T>* ptr = head;
+
+        while (ptr) {
+            cout << ptr->getItem()<< ", ";
+            ptr = ptr->getNext();
+        }
+    }
+
 };
