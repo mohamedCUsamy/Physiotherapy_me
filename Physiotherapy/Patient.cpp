@@ -73,6 +73,7 @@ void Patient::print_Patient_info()
 {
 
     cout << "Patient Type: " << (isNormal ? "Normal" : "Emergency") << endl;
+    cout << "Patient ID = " << ID << endl;
     cout << "PT (Processing Time): " << PT << endl;
     cout << "VT (Visit Time): " << VT << endl;
 

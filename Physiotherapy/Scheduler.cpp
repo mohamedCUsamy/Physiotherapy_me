@@ -7,6 +7,24 @@ using namespace std;
 
 Scheduler::Scheduler(string path)
 {
+    for (int i = 0; i < num_E_Devices; i++)
+    {
+        Ressource *Rptr = new Ressource('E');
+        E_Devices.enqueue(Rptr);
+    }
+
+    for (int i = 0; i < num_U_Devices; i++)
+    {
+        Ressource* Rptr = new Ressource('U');
+        U_Devices.enqueue(Rptr);
+    }
+
+    for (int i = 0; i < num_X_Devices; i++)
+    {
+        Ressource* Rptr = new Ressource('X');
+        X_Rooms.enqueue(Rptr);
+    }
+    //all devices are in the queue
 
     num_U_Devices = 0;
     num_E_Devices = 0;

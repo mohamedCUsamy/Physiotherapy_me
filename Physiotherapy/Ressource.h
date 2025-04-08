@@ -10,7 +10,7 @@ private:
 	int ResourceID; // where to get this
 	string ResourceType;
 public:
-	Ressource();
+	Ressource(int type);
 	void SetResourceID(int I);
 	int GetResourceId();
 	void SetResourceType(string s);

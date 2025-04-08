@@ -1,10 +1,10 @@
 #include "Ressource.h"
 
 
-Ressource::Ressource()
+Ressource::Ressource(int type)
 {
 	ResourceID = 0;
-	ResourceType = "0";
+	ResourceType = type;
 }
 
 void Ressource::SetResourceID(int I)
