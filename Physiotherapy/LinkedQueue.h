@@ -65,6 +65,7 @@ public:
 	bool peek(T& frntEntry)  const;
 	//oid <T>print() const;
 	int getCount();
+	void print();
 	~LinkedQueue();
 };
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -203,18 +204,19 @@ LinkedQueue<T>::~LinkedQueue()
 	*/
 }
 
-
-/*
-void LinkedQueue<T>::print() const {
-
+template <typename T>
+void LinkedQueue<T>::print() {
 	Node<T>* current = frontPtr;
-
-	while (current) {
-		std::cout << current->getItem() << " ";
+	T type;
+	while (current != nullptr) {
+		type = current->getItem();
+		if (current->getNext() == nullptr) {
+			cout << current->getItem();
+			return;
+		}
+		cout << current->getItem() << ", ";
 		current = current->getNext();
 	}
-	          cout << "[Rear]" << std::endl;
 }
-*/
 
 #endif

@@ -5,5 +5,5 @@ using namespace std;
 int main() {
 	string path= "test.txt";
 	Scheduler s1(path);
-	s1.Print_info();
+	s1.get_UI_ptr()->print_info(87);
 }

@@ -9,6 +9,7 @@ Patient::Patient(char* Req, int num_treatments, int* duration, int app, int arr,
 	SetPT(app);
 	SetVT(arr);
 	setType(Normality);
+    ID = id;
 
 	for (int i = 0; i < num_treatments; i++)
 	{
@@ -107,6 +108,6 @@ void Patient::print_Patient_info()
 ostream& operator<<(ostream& os, Patient* pat)
 {
 
-    os << pat->getId() << ", " << endl;
+    os << pat->getId() ;
     return os;
 }

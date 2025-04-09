@@ -8,6 +8,15 @@ using namespace std;
 Scheduler::Scheduler(string path)
 {
 
+    num_patients = 0;
+    num_U_Devices = 0;
+    num_E_Devices = 0;
+    num_X_Devices = 0;
+    pCancel = 0;
+    pReschedule = 0;
+    Croom1 = 0;
+    Croom2 = 0;
+
     // Inside your Scheduler class (probably in constructor or initialization function)
     UI* OUTPUT = new UI(
         this->num_patients,    // or just num_patients if local variable
@@ -28,7 +37,7 @@ Scheduler::Scheduler(string path)
         this->X_Rooms,
         this->In_TreatmentList,
         this->FinishedPatients,
-        this->EarlyList
+        this->EarlyPList
     );
 
     pOut = OUTPUT;
@@ -55,16 +64,13 @@ Scheduler::Scheduler(string path)
     }
     //all devices are in the queue
 
-    num_U_Devices = 0;
-    num_E_Devices = 0;
-    num_X_Devices = 0;
-
 
 
 
     // intialize all before this function 
     Load_Input(path);
 
+    cout << num_patients;
 
 }
 
@@ -154,6 +160,12 @@ void Scheduler::Load_Input(string& filename)
 
 
 }
+
+UI* Scheduler::get_UI_ptr()
+{
+    return pOut;
+}
+
 
 void Scheduler::Print_info()
 {

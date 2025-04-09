@@ -22,17 +22,19 @@ UI::UI(int num_patients, int num_U_Devices, int num_E_Devices, int num_X_Devices
 }
 
 
-void UI::print_info()
+void UI::print_info(int timestep)
 {
 
      // to print patients info
-        cout << "Current time step: " << endl;
+        cout << "Current time step: " << timestep<<endl;
         cout << "=============== ALL List =================" << endl;
-        //cout<< num_patients << "patients remaining: " << All_Patient.Print_queue() << endl; 
+        cout << num_patients << "  patients remaining:  ";
+        All_Patient.print();
+        cout<< endl;
         cout << "=============== Waiting Lists ================= " << endl;
-        cout << "E-therapy patients: " << endl;
-        cout << "U-therapy patients: " << endl;
-        cout << "X-therapy patients: " << endl;
+        cout << num_E_Devices << "  E-therapy patients: " << endl;
+        cout << num_U_Devices << "U-therapy patients: " << endl;
+        cout << num_X_Devices << "X-therapy patients: " << endl;
         cout << "=============== Early Lists ================= " << endl;
         cout << "Patients: " << endl;
         cout << "=============== Late Lists ================= " << endl;

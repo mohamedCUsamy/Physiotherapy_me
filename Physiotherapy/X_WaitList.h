@@ -1,5 +1,6 @@
 #pragma once
 #include "EU_Waitlist.h"
+#include "Patient.h"
 
 class X_WaitList : public EU_WaitList
 {

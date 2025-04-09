@@ -24,6 +24,10 @@ class Scheduler
 	float pCancel;
 	float pReschedule;
 
+
+
+	string path;
+
 	UI *pOut;
 
 	EU_WaitList  U_waitingList;
@@ -41,10 +45,11 @@ class Scheduler
 	LinkedQueue<Ressource*>U_Devices;
 	LinkedQueue<Ressource*>X_Rooms;
 
+
 	priQueue<Patient*>In_TreatmentList;
 	ArrayStack<Patient*>FinishedPatients;
 
-	EarlyPList EarlyList;
+	EarlyPList EarlyPList;
 
 
 public:
@@ -53,7 +58,7 @@ public:
 
 	void Load_Input(string& filename); //implementation
 
-
+	UI* get_UI_ptr();
 
 	void AddToWait_X(); // implementation phase 2
 
