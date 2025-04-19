@@ -57,6 +57,13 @@ string Patient::getId()
     return ID;
 }
 
+bool Patient::AddReqTreatments(Treatment* reqTreatment)
+{
+
+    return ReqTreatments.enqueue(reqTreatment);
+    
+}
+
 LinkedQueue<Treatment*> Patient::getReqTreatment()
 {
     return ReqTreatments;
@@ -109,5 +116,10 @@ ostream& operator<<(ostream& os, Patient* pat)
 {
 
     os << pat->getId() ;
+    return os;
+}
+
+ostream& operator<<(ostream& os, Patient& pat) {
+    os << pat.getId();
     return os;
 }

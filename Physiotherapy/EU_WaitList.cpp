@@ -1,36 +1,53 @@
 #include "EU_WaitList.h"
 
 
-	void EU_WaitList::insertSorted(LinkedQueue <Patient*>&EU_list)
-	{
-		
-		priQueue<Patient*>sortedqeue;
-		
-		Patient* dummyptr;
-		
-		int penalty;	
+void EU_WaitList::insertSorted(Patient* patient)
+{
+    priQueue<Patient*> sortedQueue;
 
-		while (EU_list.peek(dummyptr))
-		{
-			if (dummyptr->getVT() > dummyptr->getPT()) //////// ENO LATTEEEE///
-			{
-				penalty = (dummyptr->getVT() - dummyptr->getPT()) / 2;
-				dummyptr->SetPT(dummyptr->getPT() + penalty);
-			}
-			EU_list.dequeue(dummyptr);
-			sortedqeue.enqueue(dummyptr, dummyptr->getPT());
-		}
-		int dummyPT;
-		while (!(sortedqeue.isEmpty()))
-		{
-			dummyPT = dummyptr->getPT();
-			sortedqeue.dequeue(dummyptr, dummyPT);
-			EU_list.enqueue(dummyptr);
-		}
+    Patient* currentPatient;
+    int penalty;
 
+    while (dequeue(currentPatient))
+    {
+        if (currentPatient->getVT() > currentPatient->getPT()) 
+        {
+            penalty = (currentPatient->getVT() - currentPatient->getPT()) / 2;
+            currentPatient->SetPT(currentPatient->getPT() + penalty);
+        }
+
+        sortedQueue.enqueue(currentPatient, currentPatient->getPT());
+  
+    }
+
+//the one who instert the new patient 
+    if (patient->getVT() > patient->getPT()) 
+    {
+        penalty = (patient->getVT() - patient->getPT()) / 2;
+        patient->SetPT(patient->getPT() + penalty);
+    }
+
+    sortedQueue.enqueue(patient, patient->getPT());
+
+    int dummyPriority;
+    while (!sortedQueue.isEmpty())
+    {
+        sortedQueue.dequeue(currentPatient, dummyPriority);
+        enqueue(currentPatient);
+    }
 }
 
-	int EU_WaitList::calcTreatmentLatency()
-	{
-		return 0;
-	}
+
+
+int EU_WaitList::calcTreatmentLatency()
+{
+    int count = 0;
+    while (!isEmpty()) {
+        Patient* TempPatient;
+        Treatment* TempTreatment;
+        dequeue(TempPatient);
+        while (TempPatient->getReqTreatment().dequeue(TempTreatment))
+            count += TempTreatment->getDuration();
+    }
+    return count;
+}

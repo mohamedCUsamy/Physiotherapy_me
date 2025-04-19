@@ -129,7 +129,7 @@
   <ItemGroup>
     <ClInclude Include="ArrayStack.h" />
     <ClInclude Include="EarlyPList.h" />
-    <ClInclude Include="enums.h" />
+    <ClInclude Include="enumsqq.h" />
     <ClInclude Include="EU_WaitList.h" />
     <ClInclude Include="LinkedQueue.h" />
     <ClInclude Include="Node.h" />

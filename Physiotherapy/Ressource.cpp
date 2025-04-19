@@ -27,3 +27,11 @@ std::string Ressource::GetResourceType()
 {
 	return ResourceType;
 }
+
+ostream& operator<<(ostream& os, Ressource* pat)
+{
+
+	os << pat->GetResourceId() ;
+	return os;
+	
+}

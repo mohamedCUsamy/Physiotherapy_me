@@ -5,11 +5,12 @@ Treatment::Treatment(char type, int dur)
 	Treatment_type = type;
 	duration = dur;
 	pResource = NULL;
+	assignmentTime = 0;
 }
 
 bool Treatment::HaveRessource()
 {
-	return (pResource);
+	return pResource;
 }
 
 
@@ -21,4 +22,9 @@ char Treatment::getType()
 int Treatment::getDuration()
 {
 	return duration;
+}
+
+int Treatment::getassignmenttime()
+{
+	return assignmentTime;
 }

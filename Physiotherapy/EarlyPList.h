@@ -5,6 +5,6 @@ class EarlyPList : public priQueue<Patient*>
 {
 public:
 
-	bool Reschedule(int presc, int random);
+	bool Reschedule(int presc, int random, Patient*& FinishedPatient);
 
 };

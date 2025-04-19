@@ -49,6 +49,8 @@ class Scheduler
 	priQueue<Patient*>In_TreatmentList;
 	ArrayStack<Patient*>FinishedPatients;
 
+	priQueue<Patient*>LatePList;
+
 	EarlyPList EarlyPList;
 
 
@@ -67,6 +69,13 @@ public:
 	void AddToWait_E(); // implementation phase 2
 
 	void Print_info();  // not in wanted form
+
+	void Simulation();
+
+	void testPrint();
+
+	EU_WaitList* RandomWaitList();
+
 
 };
 

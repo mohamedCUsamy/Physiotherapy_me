@@ -4,7 +4,7 @@
 bool X_WaitList::cancel(int presc, int random, Patient*& pToBeRemoved)
 {
     pToBeRemoved = nullptr; //setting it to null just to be safe
-    if (random >= presc) {//presc: probability that a patient reschedules, random is a random number generated in the simulation
+    if (random >= presc) {
 
         return false;
     }
@@ -12,45 +12,49 @@ bool X_WaitList::cancel(int presc, int random, Patient*& pToBeRemoved)
     int rand1 = rand() % count; // gets a random value from 1 to patient exclusive
 
     LinkedQueue<Patient*> tempQ; // Temporary queue to store the patients before the patient who we want to cancel.
-    Patient* selected;// a temporary variable that holds the Patient who is cancelling
+    Patient* selected = nullptr;// a temporary variable that holds the Patient who is cancelling
 
 
-//    for (int i = 0; i < count; i++) { // for loop to dequeue all the patients before the one we want to select
+    //    for (int i = 0; i < count; i++) { // for loop to dequeue all the patients before the one we want to select
     Patient* tempPatient;
-    while(dequeue(tempPatient)) 
-    {
-        tempQ.enqueue(tempPatient);
+    for (int i = 0; i < count; ++i) {
+        Patient* curr;
+        dequeue(curr);
 
+        if (i == rand1)
+            selected = curr;
+        else
+            tempQ.enqueue(curr);
     }
 
-    dequeue(selected); // dequeueing the selected patient and storing in selected variable
+    if (!selected) return false; // safety check in case selected is null
 
     Treatment* tempTreatment;
     LinkedQueue<Treatment*> tempTreatQ;
+    Treatment* lastTreatment = nullptr; // track the last treatment safely
 
     while (selected->getReqTreatment().dequeue(tempTreatment))
     {
         tempTreatQ.enqueue(tempTreatment);
+        lastTreatment = tempTreatment;
     }
 
-    if (tempTreatment->getType() == 'X') {// if the patients last treatment is X
+    if (lastTreatment && (lastTreatment->getType() == 'X')) {// if the patients last treatment is X
+
 
         //cancel the patient
         //move to finished list
         pToBeRemoved = selected; // to be popped in the simulation
-        selected->SetPatientStatus(Status::FNSH);//changing the satus *****dk if this is totally right 
 
     }
     else {
-        selected->getReqTreatment().enqueue(tempTreatment);// requeue the patient like nth happened
+        // enqueue all treatments back
+        while (!tempTreatQ.isEmpty()) {
+            tempTreatQ.dequeue(tempTreatment);
+            selected->getReqTreatment().enqueue(tempTreatment);
+        }
+
         enqueue(selected);
-    }
-
-    while (!tempTreatQ.isEmpty()) {
-
-        tempTreatQ.dequeue(tempTreatment);
-        selected->getReqTreatment().enqueue(tempTreatment);
-
     }
 
     while (!tempQ.isEmpty()) { //queueing the rest of the patients that we previously removed back to the list
@@ -58,10 +62,6 @@ bool X_WaitList::cancel(int presc, int random, Patient*& pToBeRemoved)
         tempQ.dequeue(tempP);
         enqueue(tempP);
     }
-
-
-
-    // ps there could be an edge case here related to teh selected pointer being null so i think i need to check that
 
 
     return true;

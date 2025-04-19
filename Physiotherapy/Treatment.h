@@ -21,6 +21,7 @@ public:
 
 	char getType();
 	int getDuration();
+	int getassignmenttime();
 
 
 

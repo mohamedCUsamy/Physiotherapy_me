@@ -15,5 +15,7 @@ public:
 	int GetResourceId();
 	void SetResourceType(string s);
 	string GetResourceType();
+	friend ostream& operator<<(ostream& os, Ressource* pat);
+
 };
 

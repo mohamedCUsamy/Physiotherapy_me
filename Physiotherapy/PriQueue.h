@@ -17,11 +17,11 @@ public:
     priQueue() : head(nullptr) 
     {
         count = 0;
-        priNode<T>* fptr = head;
+       /* priNode<T>* fptr = head;
         while (fptr) {
             count++;
             fptr = fptr->getNext();
-        }
+        }*/
     }
 
     int getCount() {
@@ -38,6 +38,7 @@ public:
     //insert the new node in its correct position according to its priority
     void enqueue(const T& data, int priority) {
         priNode<T>* newNode = new priNode<T>(data, priority);
+        count++;
 
         if (head == nullptr || priority > head->getPri()) {
 
@@ -55,6 +56,7 @@ public:
     }
 
     bool dequeue(T& topEntry, int& pri) {
+        
         if (isEmpty())
             return false;
 
@@ -62,6 +64,7 @@ public:
         priNode<T>* temp = head;
         head = head->getNext();
         delete temp;
+        count--;
         return true;
     }
 
@@ -83,7 +86,8 @@ public:
         priNode<T>* ptr = head;
 
         while (ptr) {
-            cout << ptr->getItem()<< ", ";
+            int x;
+            cout << ptr->getItem(x) << ", ";
             ptr = ptr->getNext();
         }
     }

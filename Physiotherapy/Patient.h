@@ -22,6 +22,8 @@ public:
 	bool get_IsNormal();
 	string getId();
 
+	bool AddReqTreatments(Treatment* reqTreatment);
+
 	LinkedQueue <Treatment*> getReqTreatment();
 	void SetPatientStatus(Status newStatus);
 

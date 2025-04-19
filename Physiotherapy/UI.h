@@ -16,7 +16,7 @@ class UI
 {
 
 
-public:
+private:
 
         // Store references to all the lists
         int num_patients;
@@ -39,8 +39,10 @@ public:
         priQueue<Patient*>& In_TreatmentList;
         ArrayStack<Patient*>& FinishedPatients;
         EarlyPList& EarlyList;
+        priQueue<Patient*>& LateList;
 
-        // Constructor taking all the required parameters
+
+public:     // Constructor taking all the required parameters
         UI(
             int num_patients,
             int num_U_Devices,
@@ -60,10 +62,15 @@ public:
             LinkedQueue<Ressource*>& X_Rooms,
             priQueue<Patient*>& In_TreatmentList,
             ArrayStack<Patient*>& FinishedPatients,
-            EarlyPList& EarlyList
+            EarlyPList& EarlyList, 
+            priQueue<Patient*>& LateList
+
         );
 
-    void print_info(int timestep);
+
+        void printFinishedListID();
+
+        void print_info(int timestep);
 
 
 };

@@ -1,13 +1,16 @@
 #include "Scheduler.h"
 #include <fstream>
 #include "UI.h"
+#include <random>
+#include <cstdlib>  
+#include <ctime>
 #include <iostream>
 using namespace std;
 
 
 Scheduler::Scheduler(string path)
 {
-
+            
     num_patients = 0;
     num_U_Devices = 0;
     num_E_Devices = 0;
@@ -16,6 +19,26 @@ Scheduler::Scheduler(string path)
     pReschedule = 0;
     Croom1 = 0;
     Croom2 = 0;
+
+    Load_Input(path);
+    for (int i = 0; i < num_E_Devices; i++)
+    {
+        Ressource* Rptr = new Ressource('E');
+        E_Devices.enqueue(Rptr);
+    }
+
+    for (int i = 0; i < num_U_Devices; i++)
+    {
+        Ressource* Rptr = new Ressource('U');
+        U_Devices.enqueue(Rptr);
+    }
+
+    for (int i = 0; i < num_X_Devices; i++)
+    {
+        Ressource* Rptr = new Ressource('X');
+        X_Rooms.enqueue(Rptr);
+    }
+
 
     // Inside your Scheduler class (probably in constructor or initialization function)
     UI* OUTPUT = new UI(
@@ -37,40 +60,24 @@ Scheduler::Scheduler(string path)
         this->X_Rooms,
         this->In_TreatmentList,
         this->FinishedPatients,
-        this->EarlyPList
+        this->EarlyPList,
+        this->LatePList
     );
+
 
     pOut = OUTPUT;
 
 
+    srand(time(0));
 
-
-    for (int i = 0; i < num_E_Devices; i++)
-    {
-        Ressource *Rptr = new Ressource('E');
-        E_Devices.enqueue(Rptr);
-    }
-
-    for (int i = 0; i < num_U_Devices; i++)
-    {
-        Ressource* Rptr = new Ressource('U');
-        U_Devices.enqueue(Rptr);
-    }
-
-    for (int i = 0; i < num_X_Devices; i++)
-    {
-        Ressource* Rptr = new Ressource('X');
-        X_Rooms.enqueue(Rptr);
-    }
+    
     //all devices are in the queue
 
 
 
 
     // intialize all before this function 
-    Load_Input(path);
 
-    cout << num_patients;
 
 }
 
@@ -78,7 +85,13 @@ void Scheduler::Load_Input(string& filename)
 {
 
         ifstream file(filename);
-        if (!file) { cerr << "Error opening file!\n"; return; }
+
+        if (!file) {
+            cout << "Error opening file!" << endl; 
+            return;
+        }
+
+
 
         int E, U, X;
        //cout << "Devices: E=" << E << ", U=" << U << ", X=" << X << "\n";
@@ -117,17 +130,19 @@ void Scheduler::Load_Input(string& filename)
         
 
         for (int i = 0; i < numPatients; i++) {
-            char type; int VT, PT;
+            char type; 
+            int VT;
+            int PT;
             file >> type >> PT >> VT >> numTreatments;
 
             if (i == 0) {
                 treatments = new char[numTreatments]; // creat array once
                 duration = new int[numTreatments];
             }
-            for (int i = 0; i < numTreatments; i++)
+            for (int j = 0; j < numTreatments; j++)
             {
-                treatments[i] = ' ';
-                duration[i] = 0;
+                treatments[j] = ' ';
+                duration[j] = 0;
 
             }
 
@@ -155,8 +170,9 @@ void Scheduler::Load_Input(string& filename)
         }
         file.close();
     
+       
 
-      
+
 
 
 }
@@ -167,35 +183,182 @@ UI* Scheduler::get_UI_ptr()
 }
 
 
-void Scheduler::Print_info()
+
+void Scheduler::Simulation()
 {
-    // to print patients info
-    cout << "===== Scheduler Info =====" << endl;
-    cout << "Number of Patients: " << num_patients << endl;
-    cout << "Number of U Devices: " << num_U_Devices << endl;
-    cout << "Number of E Devices: " << num_E_Devices << endl;
-    cout << "Number of X Rooms: " << num_X_Devices << endl;
-    cout << "Cancellation Probability: " << pCancel << endl;
-    cout << "Reschedule Probability: " << pReschedule << endl;
 
-    cout << "\n----- Patients -----" << endl;
+    int timestep = 0;
 
-    LinkedQueue<Patient*> tempQueue;
-    Patient* p;
+    while (FinishedPatients.getCount() < num_patients){
 
-    while (!All_Patient.isEmpty()) {
-        All_Patient.dequeue(p);
-        if (p) {
-            p->print_Patient_info();
-            cout << "---------------------" << endl;
+
+        Patient* TempPatient;
+        All_Patient.peek(TempPatient);
+            
+
+
+        while (TempPatient->getVT() == timestep) {
+
+
+            All_Patient.dequeue(TempPatient);
+
+            if (TempPatient->getVT() < TempPatient->getPT()) {
+
+                EarlyPList.enqueue(TempPatient, TempPatient->getPT());
+
+            }
+            else if (TempPatient->getVT() > TempPatient->getPT()) {
+
+                LatePList.enqueue(TempPatient, TempPatient->getPT());
+
+
+            }
+            else {//here generate random number N 
+
+
+                int N = rand() % 100;
+
+                if (N < 33) {
+
+                    E_waitingList.enqueue(TempPatient);
+
+                }
+                else if (N >= 33 && N < 66) {
+
+                    U_waitingList.enqueue(TempPatient);
+
+
+                }
+                else {
+                    X_waitingList.enqueue(TempPatient);
+
+                }
+            }
+
+
+            All_Patient.peek(TempPatient);
+            if (TempPatient->getVT() != timestep || All_Patient.isEmpty()) {
+                break;
+            }
+
+
         }
-        tempQueue.enqueue(p);
-    }
 
-    // Restore original queue
-    while (!tempQueue.isEmpty()) {
-        tempQueue.dequeue(p);
-        All_Patient.enqueue(p);
+
+
+        //part b;
+        
+        int X = rand() % 100;
+        int PlaceHolder;
+        if (X < 10) {
+            EU_WaitList* tempWaitList = RandomWaitList();
+
+            if (!EarlyPList.isEmpty()) {
+                Patient* TempPatient;
+                EarlyPList.dequeue(TempPatient, PlaceHolder);
+                tempWaitList->enqueue(TempPatient);
+            }
+
+        } if (X >= 10 && X < 20) {
+
+            Patient* TempPatient = nullptr;
+
+            if (!LatePList.isEmpty()) {
+                LatePList.dequeue(TempPatient, PlaceHolder);
+                EU_WaitList* tempWaitList;
+                tempWaitList = RandomWaitList();
+
+                int penalty = (TempPatient->getVT() - TempPatient->getPT()) / 2;
+
+                int newPT = TempPatient->getPT() + penalty;
+
+                TempPatient->SetPT(newPT);
+
+                tempWaitList->enqueue(TempPatient);
+            }
+
+        } if (X >= 20 && X < 40) {
+
+            Treatment* TempTreatment;
+            Patient* TempPatient;
+
+            EU_WaitList* TempWaitList = RandomWaitList();
+
+            if (!X_waitingList.isEmpty()) {
+                X_waitingList.dequeue(TempPatient);
+                TempPatient->getReqTreatment().peek(TempTreatment);
+
+                In_TreatmentList.enqueue(TempPatient, TempTreatment->getassignmenttime() + TempTreatment->getDuration());
+            }
+            if(!TempWaitList->isEmpty()){
+
+                TempWaitList->dequeue(TempPatient);
+                TempPatient->getReqTreatment().peek(TempTreatment);
+                In_TreatmentList.enqueue(TempPatient, TempTreatment->getassignmenttime() + TempTreatment->getDuration());
+            }
+
+
+        } if (X >= 40 && X < 50) {
+            Patient* TempPatient;
+            if (!In_TreatmentList.isEmpty()) {
+                In_TreatmentList.dequeue(TempPatient, PlaceHolder);
+                
+                EU_WaitList* tempwaitlist = RandomWaitList();
+                tempwaitlist->insertSorted(TempPatient);
+            }
+        } if (X >= 50 && X < 60) {
+            Patient* TempPatient;
+            if (!In_TreatmentList.isEmpty()) {
+                In_TreatmentList.dequeue(TempPatient, PlaceHolder);
+                FinishedPatients.push(TempPatient);
+            }
+        } if (X >= 60 && X < 70) {
+
+            Patient* TempPatient;
+
+            //if (!X_waitingList.isEmpty()) {
+            //    int random = rand() % X_waitingList.getCount();
+            //     X_waitingList.cancel(pCancel, random, TempPatient);
+            //    FinishedPatients.push(TempPatient);
+
+            //}
+        }
+        if (X >= 70 && X < 80) {
+            if (!X_waitingList.isEmpty() && !EarlyPList.isEmpty()) {
+                int random = rand() % X_waitingList.getCount();
+
+
+                Patient* TempPatient;
+                EarlyPList.Reschedule(pReschedule, random, TempPatient);
+                FinishedPatients.push(TempPatient);
+
+            }
+        }
+       
+
+        pOut->print_info(timestep);
+        cout << endl;cout << endl;cout << endl;cout << endl;cout << endl;cout << endl;cout << endl;cout << endl;cout << endl;
+        timestep++;
+
     }
+  
 
 }
+
+
+EU_WaitList* Scheduler::RandomWaitList()
+{
+    int N = rand() % 100;
+
+    if (N < 33) {
+        return &U_waitingList;
+    }
+    else if (N >= 33 && N < 66) {
+        return &E_waitingList;
+    }
+    else {
+        return &X_waitingList;
+    }
+}
+
+
