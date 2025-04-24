@@ -8,9 +8,13 @@ Treatment::Treatment(char type, int dur)
 	assignmentTime = 0;
 }
 
-bool Treatment::HaveRessource()
+bool Treatment::HaveResource()
 {
 	return pResource;
+}
+
+void Treatment::CanAssign()
+{
 }
 
 

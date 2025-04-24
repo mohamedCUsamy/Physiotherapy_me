@@ -17,10 +17,8 @@ void EU_WaitList::insertSorted(Patient* patient)
         }
 
         sortedQueue.enqueue(currentPatient, currentPatient->getPT());
-  
     }
 
-//the one who instert the new patient 
     if (patient->getVT() > patient->getPT()) 
     {
         penalty = (patient->getVT() - patient->getPT()) / 2;
@@ -37,17 +35,36 @@ void EU_WaitList::insertSorted(Patient* patient)
     }
 }
 
-
-
-int EU_WaitList::calcTreatmentLatency()
+int EU_WaitList::calcTreatmentLatency(char type)
 {
     int count = 0;
+    int uCount;
+    int eCount;
+    int xCount;
+    Patient* TempPatient;
+    Treatment* TempTreatment;
+    LinkedQueue<Patient*> tempQ;
     while (!isEmpty()) {
-        Patient* TempPatient;
-        Treatment* TempTreatment;
+ 
         dequeue(TempPatient);
-        while (TempPatient->getReqTreatment().dequeue(TempTreatment))
-            count += TempTreatment->getDuration();
+
+        while (TempPatient->getReqTreatment().dequeue(TempTreatment)) {
+            if (dynamic_cast<U_Therapy*>(TempTreatment))
+                uCount = TempTreatment->getDuration();
+            else if (dynamic_cast<X_Therapy*>(TempTreatment))
+                xCount = TempTreatment->getDuration();
+            else if (dynamic_cast<E_Therapy*>(TempTreatment))
+                eCount = TempTreatment->getDuration();
+
+            tempQ.enqueue(TempPatient);
+        }
+
     }
+
+    while (!tempQ.isEmpty()) {
+        tempQ.dequeue(TempPatient);
+        enqueue(TempPatient);
+    }
+
     return count;
 }

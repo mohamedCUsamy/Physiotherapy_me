@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 #include "LinkedQueue.h"
-#include"Ressource.h"
+#include"Resource.h"
 #include "EU_WaitList.h"
 #include "X_WaitList.h"
 #include "Patient.h"
@@ -41,9 +41,9 @@ class Scheduler
 
 	LinkedQueue<Patient*>  All_Patient;
 	
-	LinkedQueue<Ressource*>E_Devices;
-	LinkedQueue<Ressource*>U_Devices;
-	LinkedQueue<Ressource*>X_Rooms;
+	LinkedQueue<Resource*>E_Devices;
+	LinkedQueue<Resource*>U_Devices;
+	LinkedQueue<Resource*>X_Rooms;
 
 
 	priQueue<Patient*>In_TreatmentList;
@@ -61,6 +61,10 @@ public:
 	void Load_Input(string& filename); //implementation
 
 	UI* get_UI_ptr();
+
+	void AddToEarly_Late(Patient* TempPatient);
+		
+	void AddToWait_EUX(Patient* patient);
 
 	void AddToWait_X(); // implementation phase 2
 

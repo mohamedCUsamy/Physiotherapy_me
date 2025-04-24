@@ -5,8 +5,8 @@ using namespace std;
 UI::UI(int num_patients, int num_U_Devices, int num_E_Devices, int num_X_Devices, float pCancel, float pReschedule,
     EU_WaitList& U_waitingList, EU_WaitList& E_waitingList, X_WaitList& X_waitingList,
     priQueue<Patient*>& inTreatment, int Croom1, int Croom2,
-    LinkedQueue<Patient*>& All_Patient, LinkedQueue<Ressource*>& E_Devices,
-    LinkedQueue<Ressource*>& U_Devices, LinkedQueue<Ressource*>& X_Rooms,
+    LinkedQueue<Patient*>& All_Patient, LinkedQueue<Resource*>& E_Devices,
+    LinkedQueue<Resource*>& U_Devices, LinkedQueue<Resource*>& X_Rooms,
     priQueue<Patient*>& In_TreatmentList, ArrayStack<Patient*>& FinishedPatients,
     EarlyPList& EarlyList, priQueue<Patient*>& LateList)
     :num_patients(num_patients), num_U_Devices(num_U_Devices), num_E_Devices(num_E_Devices), num_X_Devices(num_X_Devices),
@@ -22,7 +22,6 @@ UI::UI(int num_patients, int num_U_Devices, int num_E_Devices, int num_X_Devices
 }
 
 
-// this function was added to print the finished list instead of the build in one in stack but Okay working good
 void UI::printFinishedListID() {
     ArrayStack<Patient*> TempStack; 
     Patient* TempPatient = nullptr;

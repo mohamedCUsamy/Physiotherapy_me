@@ -2,21 +2,36 @@
 using namespace std;
 #include <iostream>
 #include <string>
+#include "U_Therapy.h"
+#include "E_Therapy.h"
+#include "X_Therapy.h"
 
 
-Patient::Patient(char* Req, int num_treatments, int* duration, int app, int arr, bool Normality,string id)
+
+Patient::Patient(char* Req, int num_treatments, int* duration, int app, int arr, bool Normality, string id)
 {
-	SetPT(app);
-	SetVT(arr);
-	setType(Normality);
+    SetPT(app);
+    SetVT(arr);
+    setType(Normality);
     ID = id;
 
-	for (int i = 0; i < num_treatments; i++)
-	{
-		Treatment* tptr = new Treatment(Req[i],duration[i]);
-		ReqTreatments.enqueue(tptr);
-	}
 
+    Treatment* tptr;
+    for (int i = 0; i < num_treatments; i++)
+    {
+        if (Req[i] == 'U') {
+            tptr = new U_Therapy(Req[i], 1);
+            ReqTreatments.enqueue(tptr);
+        }
+        else if (Req[i] == 'E') {
+            tptr = new E_Therapy(Req[i], 1);
+            ReqTreatments.enqueue(tptr);
+        }
+        else if (Req[i] == 'X'){
+            tptr = new X_Therapy(Req[i], 1);
+            ReqTreatments.enqueue(tptr);
+        }
+    }
 	
 
 }
@@ -55,6 +70,11 @@ bool Patient::get_IsNormal()
 string Patient::getId()
 {
     return ID;
+}
+
+Status Patient::getPatientStatus()
+{
+    return Status();
 }
 
 bool Patient::AddReqTreatments(Treatment* reqTreatment)

@@ -1,34 +1,34 @@
-#include "Ressource.h"
+#include "Resource.h"
 
 
-Ressource::Ressource(int type)
+Resource::Resource(int type)
 {
 	ResourceID = 0;
 	ResourceType = type;
 }
 
-void Ressource::SetResourceID(int I)
+void Resource::SetResourceID(int I)
 {
 	ResourceID = I;
 }
 
-int Ressource::GetResourceId() 
+int Resource::GetResourceId() 
 {
 	return ResourceID;
 }
 
 
-void Ressource::SetResourceType(std::string s)
+void Resource::SetResourceType(std::string s)
 {
 	ResourceType = s;
 }
 
-std::string Ressource::GetResourceType()
+std::string Resource::GetResourceType()
 {
 	return ResourceType;
 }
 
-ostream& operator<<(ostream& os, Ressource* pat)
+ostream& operator<<(ostream& os, Resource* pat)
 {
 
 	os << pat->GetResourceId() ;

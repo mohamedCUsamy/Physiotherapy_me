@@ -129,30 +129,36 @@
   <ItemGroup>
     <ClInclude Include="ArrayStack.h" />
     <ClInclude Include="EarlyPList.h" />
-    <ClInclude Include="enumsqq.h" />
+    <ClInclude Include="enums.h" />
     <ClInclude Include="EU_WaitList.h" />
+    <ClInclude Include="E_Therapy.h" />
     <ClInclude Include="LinkedQueue.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Patient.h" />
     <ClInclude Include="priNode.h" />
     <ClInclude Include="PriQueue.h" />
     <ClInclude Include="QueueADT.h" />
-    <ClInclude Include="Ressource.h" />
+    <ClInclude Include="Resource.h" />
     <ClInclude Include="Scheduler.h" />
     <ClInclude Include="StackADT.h" />
     <ClInclude Include="Treatment.h" />
     <ClInclude Include="UI.h" />
+    <ClInclude Include="U_Therapy.h" />
+    <ClInclude Include="X_Therapy.h" />
     <ClInclude Include="X_WaitList.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EarlyPList.cpp" />
     <ClCompile Include="EU_WaitList.cpp" />
+    <ClCompile Include="E_Therapy.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Patient.cpp" />
     <ClCompile Include="Ressource.cpp" />
     <ClCompile Include="Scheduler.cpp" />
     <ClCompile Include="Treatment.cpp" />
     <ClCompile Include="UI.cpp" />
+    <ClCompile Include="U_Therapy.cpp" />
+    <ClCompile Include="X_Therapy.cpp" />
     <ClCompile Include="X_WaitList.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

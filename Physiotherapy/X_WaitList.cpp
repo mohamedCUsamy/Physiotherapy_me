@@ -1,5 +1,4 @@
 #include "X_WaitList.h"
-#include "enums.h"
 
 bool X_WaitList::cancel(int presc, int random, Patient*& pToBeRemoved)
 {
@@ -27,7 +26,7 @@ bool X_WaitList::cancel(int presc, int random, Patient*& pToBeRemoved)
             tempQ.enqueue(curr);
     }
 
-    if (!selected) return false; // safety check in case selected is null
+    //if (!selected) return false; // safety check in case selected is null
 
     Treatment* tempTreatment;
     LinkedQueue<Treatment*> tempTreatQ;
@@ -39,8 +38,7 @@ bool X_WaitList::cancel(int presc, int random, Patient*& pToBeRemoved)
         lastTreatment = tempTreatment;
     }
 
-    if (lastTreatment && (lastTreatment->getType() == 'X')) {// if the patients last treatment is X
-
+    if (lastTreatment && dynamic_cast<X_Therapy*>(lastTreatment)) {// if the patients last treatment is X
 
         //cancel the patient
         //move to finished list

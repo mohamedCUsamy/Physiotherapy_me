@@ -41,8 +41,7 @@ bool EarlyPList::Reschedule(int presc, int random, Patient*& FinishedPatient)
 
          int rand2 = rand() % (101 - selected->getPT()) + selected->getPT();// generating a random appointment time
 
-    // that is later than the PT of selected patient 
-    //
+    // that is later than the PT of selected patient
     selected->SetPT(rand2); // setting the new PT for the patient
     enqueue(selected, rand2); // enqeuueing patient in original priority queue
 

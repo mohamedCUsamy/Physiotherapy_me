@@ -33,10 +33,10 @@
     <ClInclude Include="Treatment.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Ressource.h">
+    <ClInclude Include="Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="enumsqq.h">
+    <ClInclude Include="enums.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EarlyPList.h">
@@ -66,6 +66,15 @@
     <ClInclude Include="ArrayStack.h">
       <Filter>Header Files\Data Structures</Filter>
     </ClInclude>
+    <ClInclude Include="U_Therapy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="E_Therapy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="X_Therapy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -93,6 +102,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EarlyPList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="U_Therapy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E_Therapy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="X_Therapy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

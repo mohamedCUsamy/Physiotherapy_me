@@ -1,22 +1,22 @@
 #pragma once
-#include "Ressource.h"
+#include "Resource.h"
 
 
-class Ressource;
+class Resource;
 class Treatment
 {
 	char Treatment_type;
 	int duration;
-	Ressource * pResource;
+	Resource * pResource;
 	int assignmentTime;
 
 
 public:
 	Treatment(char type,int dur);
 
-	bool HaveRessource();
+	bool HaveResource();
 
-	//virtual void CanAssign();
+	virtual void CanAssign();
 	//virtual void MoveToWait();
 
 	char getType();

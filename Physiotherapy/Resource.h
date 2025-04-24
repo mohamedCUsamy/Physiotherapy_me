@@ -4,18 +4,18 @@ using namespace std;
 #include <string>
 
 
-class Ressource
+class Resource
 {
 private:
 	int ResourceID; // where to get this
 	string ResourceType;
 public:
-	Ressource(int type);
+	Resource(int type);
 	void SetResourceID(int I);
 	int GetResourceId();
 	void SetResourceType(string s);
 	string GetResourceType();
-	friend ostream& operator<<(ostream& os, Ressource* pat);
+	friend ostream& operator<<(ostream& os, Resource* pat);
 
 };
 

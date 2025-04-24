@@ -23,19 +23,19 @@ Scheduler::Scheduler(string path)
     Load_Input(path);
     for (int i = 0; i < num_E_Devices; i++)
     {
-        Ressource* Rptr = new Ressource('E');
+        Resource* Rptr = new Resource('E');
         E_Devices.enqueue(Rptr);
     }
 
     for (int i = 0; i < num_U_Devices; i++)
     {
-        Ressource* Rptr = new Ressource('U');
+        Resource* Rptr = new Resource('U');
         U_Devices.enqueue(Rptr);
     }
 
     for (int i = 0; i < num_X_Devices; i++)
     {
-        Ressource* Rptr = new Ressource('X');
+        Resource* Rptr = new Resource('X');
         X_Rooms.enqueue(Rptr);
     }
 
@@ -85,12 +85,6 @@ void Scheduler::Load_Input(string& filename)
 {
 
         ifstream file(filename);
-
-        if (!file) {
-            cout << "Error opening file!" << endl; 
-            return;
-        }
-
 
 
         int E, U, X;
@@ -183,6 +177,97 @@ UI* Scheduler::get_UI_ptr()
 }
 
 
+void Scheduler::AddToEarly_Late(Patient*TempPatient)
+{
+
+    if(TempPatient->get_IsNormal()){//dy elmafrood tet3ml hena wala la??? 
+
+        
+        Treatment* TempTreatment;
+
+ 
+        if (TempPatient->getVT() < TempPatient->getPT()) {
+
+            EarlyPList.enqueue(TempPatient, TempPatient->getPT());
+
+        }
+        else if (TempPatient->getVT() > TempPatient->getPT()) {
+
+            LatePList.enqueue(TempPatient, TempPatient->getPT());
+        }
+        else
+        { 
+            TempPatient->getReqTreatment().dequeue(TempTreatment);
+           
+            if (TempTreatment->getType() == 'E')
+                E_waitingList.enqueue(TempPatient);
+
+            else  if (TempTreatment->getType() == 'U')
+                U_waitingList.enqueue(TempPatient);
+            else
+                X_waitingList.enqueue(TempPatient);
+
+        }
+    }
+    else {
+
+
+        if ((E_waitingList.calcTreatmentLatency('E')) < (U_waitingList.calcTreatmentLatency('U')) && (E_waitingList.calcTreatmentLatency('E')) < X_waitingList.calcTreatmentLatency('X'))
+            E_waitingList.enqueue(TempPatient);
+		else if ((U_waitingList.calcTreatmentLatency('U')) < (E_waitingList.calcTreatmentLatency('E')) && (U_waitingList.calcTreatmentLatency('U')) < X_waitingList.calcTreatmentLatency('X'))
+			U_waitingList.enqueue(TempPatient);
+		else
+			X_waitingList.enqueue(TempPatient);
+    }
+}
+
+void Scheduler::AddToWait_EUX(Patient*patient)
+{
+    Treatment* TempTreatment;
+    if (patient->get_IsNormal()) { // 7ases lama el AP yeegy hwa yenady 3al function
+        //law early
+        if (patient->getPatientStatus() == Status::ERLY) {
+            patient->getReqTreatment().dequeue(TempTreatment);
+
+            if (TempTreatment->getType() == 'E')
+                E_waitingList.enqueue(patient);
+
+            else  if (TempTreatment->getType() == 'U')
+                U_waitingList.enqueue(patient);
+            else
+                X_waitingList.enqueue(patient);
+        }
+        
+        //law late
+        if (patient->getPatientStatus() == Status::LATE) {
+            patient->getReqTreatment().dequeue(TempTreatment);
+
+            if (TempTreatment->getType() == 'E')
+                E_waitingList.enqueue(patient);
+
+            else  if (TempTreatment->getType() == 'U')
+                U_waitingList.enqueue(patient);
+            else
+                X_waitingList.enqueue(patient);
+
+        }
+
+    }
+   
+        
+   
+    
+    else {//lazem ashoof eih el tratments el 3ando el awl asln
+        patient->getReqTreatment().dequeue(TempTreatment);
+
+        if ((E_waitingList.calcTreatmentLatency('E')) < (U_waitingList.calcTreatmentLatency('U')) && (E_waitingList.calcTreatmentLatency('E')) < X_waitingList.calcTreatmentLatency('X'))
+            E_waitingList.enqueue(patient);
+        else if ((U_waitingList.calcTreatmentLatency('U')) < (E_waitingList.calcTreatmentLatency('E')) && (U_waitingList.calcTreatmentLatency('U')) < X_waitingList.calcTreatmentLatency('X'))
+            U_waitingList.enqueue(patient);
+        else
+            X_waitingList.enqueue(patient);
+    }
+}
 
 void Scheduler::Simulation()
 {
@@ -316,12 +401,12 @@ void Scheduler::Simulation()
 
             Patient* TempPatient;
 
-            //if (!X_waitingList.isEmpty()) {
-            //    int random = rand() % X_waitingList.getCount();
-            //     X_waitingList.cancel(pCancel, random, TempPatient);
-            //    FinishedPatients.push(TempPatient);
+            if (!X_waitingList.isEmpty()) {
+                int random = rand() % X_waitingList.getCount();
+                 X_waitingList.cancel(pCancel, random, TempPatient);
+                FinishedPatients.push(TempPatient);
 
-            //}
+            }
         }
         if (X >= 70 && X < 80) {
             if (!X_waitingList.isEmpty() && !EarlyPList.isEmpty()) {
@@ -337,7 +422,6 @@ void Scheduler::Simulation()
        
 
         pOut->print_info(timestep);
-        cout << endl;cout << endl;cout << endl;cout << endl;cout << endl;cout << endl;cout << endl;cout << endl;cout << endl;
         timestep++;
 
     }
