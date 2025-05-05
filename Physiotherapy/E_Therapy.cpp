@@ -4,7 +4,9 @@ E_Therapy::E_Therapy(char type, int dur) : Treatment(type, dur)
 {
 }
 
-void E_Therapy::CanAssign()
+bool E_Therapy::CanAssign(LinkedQueue<Resource*>& R)
 {
-	return;
+	if (R.isEmpty() && !HaveResource())
+		return false;
+	return true;
 }

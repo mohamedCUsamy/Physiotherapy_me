@@ -7,7 +7,9 @@ U_Therapy::U_Therapy(char type, int dur): Treatment(type,  dur)
 
 }
 
-void U_Therapy::CanAssign()
+bool U_Therapy::CanAssign(LinkedQueue<Resource*> &R)
 {
-	return;
+	if (R.isEmpty() && !HaveResource() )
+		return false;
+	return true;
 }

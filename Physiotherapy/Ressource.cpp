@@ -7,6 +7,13 @@ Resource::Resource(int type)
 	ResourceType = type;
 }
 
+Resource::Resource(int type, int cR1, int cR2)
+{
+	ResourceType = type;
+	room_capacity_1 = cR1;
+	room_capacity_2 = cR2;
+}
+
 void Resource::SetResourceID(int I)
 {
 	ResourceID = I;

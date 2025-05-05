@@ -35,7 +35,7 @@ Scheduler::Scheduler(string path)
 
     for (int i = 0; i < num_X_Devices; i++)
     {
-        Resource* Rptr = new Resource('X');
+        Resource* Rptr = new Resource('X',Croom1,Croom2);
         X_Rooms.enqueue(Rptr);
     }
 
@@ -268,7 +268,39 @@ void Scheduler::AddToWait_EUX(Patient*patient)
             X_waitingList.enqueue(patient);
     }
 }
+///////////////////////////////////////////////////////////////
+bool Scheduler::Assign_U(Patient* pat, int timestep)
+{
+    if (U_Devices.isEmpty() || U_waitingList.isEmpty()) { return false; }
 
+    Resource* pRes = NULL;
+    pRes = new Resource('U');
+    U_Devices.dequeue(pRes);
+    return true;
+
+}
+
+bool Scheduler::Assign_X(Patient* pat, int timestep)
+{
+    if ( X_Rooms.isEmpty() || X_waitingList.isEmpty()) { return false; }
+
+    Resource* pRes = NULL;
+    pRes = new Resource('X');
+    X_Rooms.dequeue(pRes);
+    return true;
+
+}
+
+bool Scheduler::Assign_E(Patient* pat, int timestep)
+{
+    if (E_Devices.isEmpty() || E_waitingList.isEmpty()) { return false; }
+
+    Resource* pRes = NULL;
+    pRes = new Resource('E');
+    E_Devices.dequeue(pRes);
+    return true;
+}
+///////////////////////////////////////////////////////////////
 void Scheduler::Simulation()
 {
 

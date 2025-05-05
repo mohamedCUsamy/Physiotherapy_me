@@ -1,5 +1,7 @@
 #pragma once
 #include "Treatment.h"
+#include "LinkedQueue.h"
+
 class E_Therapy: public Treatment
 {
 
@@ -7,7 +9,7 @@ class E_Therapy: public Treatment
 public:
 
 	E_Therapy(char type, int dur);
-	void CanAssign();
+	bool CanAssign(LinkedQueue<Resource*>& R);
 
 };
 

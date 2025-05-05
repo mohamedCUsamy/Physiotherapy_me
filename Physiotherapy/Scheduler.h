@@ -1,5 +1,5 @@
-#include <iostream>
 using namespace std;
+#include <iostream>
 #include "LinkedQueue.h"
 #include"Resource.h"
 #include "EU_WaitList.h"
@@ -74,9 +74,14 @@ public:
 
 	void Print_info();  // not in wanted form
 
+
+	bool Assign_U(Patient* pat, int timestep);
+	bool Assign_X(Patient* pat, int timestep);
+	bool Assign_E(Patient* pat, int timestep);
+
 	void Simulation();
 
-	void testPrint();
+	//void testPrint();
 
 	EU_WaitList* RandomWaitList();
 
