@@ -31,7 +31,7 @@ private:
         X_WaitList& X_waitingList;
         priQueue<Patient*>& inTreatment;
         int Croom1;
-        int Croom2;
+        int Croom2; // hey bro remember to make this a reference to store live scheduler code
         LinkedQueue<Patient*>& All_Patient;
         LinkedQueue<Resource*>& E_Devices;
         LinkedQueue<Resource*>& U_Devices;
